@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Employee Form</h1>
+    <form id="employeeForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="id">ID:</label>
+        <textarea id="id" rows="4" cols="50" placeholder="Enter your ID"></textarea>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="Male" required>
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="Female" required>
+        <label for="female">Female</label><br>
+        <label for="department">Department:</label>
+        <select id="department" name="department" required>
+            <option value="Software Engineer">Software Engineer</option>
+            <option value="IT">IT department</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Mechanical Engineer">Mechanical Engineer</option>
+        </select><br><br>
+        Bike: <input type="checkbox" id="bike" name="vehicle" value="Bike">
+        Car: <input type="checkbox" id="car" name="vehicle" value="Car">
+        Scooty: <input type="checkbox" id="scooty" name="vehicle" value="Scooty">
+        Scooter: <input type="checkbox" id="scooter" name="vehicle" value="Scooter"> <br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="result" style="display: none;">
+        <h3>Submitted Data:</h3>
+        <p>Name: <span id="displayName"></span></p>
+        <p>ID: <span id="displayId"></span></p>
+        <p>Email: <span id="displayEmail"></span></p>
+        <p>Gender: <span id="displayGender"></span></p>
+        <p>Department: <span id="displayDepartment"></span></p>
+        <p>Vehicle: <span id="displayVehicle"></span></p>
+    </div>
+    <script>
+        document.getElementById('employeeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const id = document.getElementById('id').value;
+            const email = document.getElementById('email').value;
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const department = document.getElementById('department').value;
+
+            const selectedVehicles = Array.from(document.querySelectorAll('input[name="vehicle"]:checked'))
+                .map(vehicle => vehicle.value)
+                .join(', ');
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayId').textContent = id;
+            document.getElementById('displayEmail').textContent = email;
+            document.getElementById('displayGender').textContent = gender;
+            document.getElementById('displayDepartment').textContent = department;
+            document.getElementById('displayVehicle').textContent = selectedVehicles;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
